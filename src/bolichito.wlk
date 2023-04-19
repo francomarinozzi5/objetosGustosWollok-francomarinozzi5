@@ -1,31 +1,38 @@
-import objetos.*
+import Gustos.*
 
-object bolichito {
-	var objetoEnMostrador
-	var objetoEnVidriera
+object bolichito{
+	var objetoEnMostrador 
+	var objetoEnVidriera 
 	
-	method ponerEnMostrador(objeto) { objetoEnMostrador = objeto }
-	method ponerEnVidriera(objeto) { objetoEnVidriera = objeto }
-	
-	method esBrillante() { 
-		const elDeMostradorBrilla = true   // implementar
-		const elDeVidrieraBrilla = true   // implementar
-		return elDeMostradorBrilla and elDeVidrieraBrilla
+	method esBrillante(){
+		return (objetoEnMostrador.material().brilla() == false) and (objetoEnVidriera.material().brilla() == false) 
 	}
 	
-	method esMonocromatico() {
-		return objetoEnMostrador.color() == objetoEnVidriera.color()
+	method esMonocromatico(){
+		return (objetoEnMostrador.color() == objetoEnVidriera.color())
 	}
 	
-	method estaDesequilibrado() {
-		// completar
+	method estaDesequilibrado(){
+		return objetoEnMostrador.peso() > objetoEnVidriera.peso()
 	}
 	
-	method tieneAlgoDeColor(color) {
-		// completar
+	method tieneAlgoDeColor(color){
+		return (objetoEnMostrador.color() == color) || (objetoEnVidriera.color() == color)
 	}
-
-	method puedeOfrecerleAlgoA(persona) {
-		// completar
+	
+	method puedeMejorar(){
+		return self.esMonocromatico() || self.estaDesequilibrado()
+	}
+	
+	method puedeOfrecerAlgoA(persona){
+		return persona.leGusta(objetoEnMostrador)|| persona.leGusta(objetoEnVidriera)
+	}
+	
+	method setObjetoMostrador(objeto){
+		objetoEnMostrador = objeto
+	}
+	
+	method setObjetoVidriera(objeto){
+		objetoEnVidriera = objeto
 	}
 }
